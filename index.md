@@ -69,8 +69,7 @@ Your paths will be based on your user id too, don't forget to substitute them wh
 
         ls -a .ssh  
 
-4.  If this command returns the error 'No such file or directory', then we need to create the directory.
-If you don't see this warning, then you can proceed to Step 6
+4.  If this command returns the error 'No such file or directory', then we need to create the directory.  If you don't see this warning, then you can proceed to Step 6
 
 5.  Create a directory named '.ssh'
 
@@ -86,7 +85,9 @@ Use the following command to create your keys:
         ssh-keygen -b 4096 -t rsa -f HPC
         
 8. This command creates two files, a public and private key of type 'rsa' with 4096 byte encryption, files will be named HPC.pub and HPC respectively.
+
 * HPC is the 'private key' which will be kept securely on your local computer
+
 * HPC.pub is the 'public key' which needs to be placed in '.ssh/authorized_keys' in your HPC HOME account
 
 9. Start by creating a the .ssh config file with the command `touch`
@@ -109,7 +110,9 @@ Use the following command to create your keys:
     		
 	
 13. To exit nano, and save your config file, do the following:
+
 * Hold CONTROL and press 'X' (to save)
+
 * Type 'y' to confirm the file name as 'config' and then press ENTER
 
 14. Before we can connect to the HPC with our shiny new keys, we'll need to add our PUBLIC key to a file in your HPC home account.
@@ -123,7 +126,8 @@ Your key is just a long text string, let's copy it onto your clipboard so that w
 
          ssh HPC
         
-* When you FIRST connect you'll be presented with a warning 'The authenticity of host can't be established.  Are you sure you want to continue connecting'
+* When you FIRST connect you'll be presented with a warning 'The authenticity of host can't be established.  Are you sure you want to continue connecting?'
+
 * This is your local computer warning you that you're about to connect to another computer it hasn't connected to before, press 'yes' then ENTER to proceed
 
 2. Navigate to the '.ssh/' directory using `cd`
@@ -142,11 +146,14 @@ Your key is just a long text string, let's copy it onto your clipboard so that w
 
          ssh HPC
          
-* If all is well, your connection to the HPC will proceed WITHOUT you needing to specify your password
+* If all is well, your connection to the HPC will proceed WITHOUT you needing to specify your password.
+
 * Please note, that ANYONE who obtains your PRIVATE key will now be able to connect to the HPC as you without providing a password.
+
 * You must protect your PRIVATE key.  To ensure maximum security for your PRIVATE key, we recommend using the following security settings for your .ssh directory and the files within it.
 
-6. Return your HOME account on YOUR computer (NOT THE HPC), simply input the command `cd` into your Terminal, then run the following commands:
+6. Return to your HOME account on YOUR computer (NOT THE HPC), simply input the command `cd` into your Terminal, then run the following commands:
+
 * Set the permissions on your .ssh directory to 'read-only' for others 
 
         chmod 744 .ssh/
@@ -156,6 +163,7 @@ Your key is just a long text string, let's copy it onto your clipboard so that w
         chmod 600 .ssh/HPC
 
 7. Now reconnect to the HPC using `ssh HPC`, then run the following commands:
+
 * Set the permissions on your .ssh directory 
         
         chmod 700 .ssh/
@@ -187,10 +195,15 @@ This means the files you synchronise will be viewable by other members of your A
         
 * Here is an example of what a symlink looks like when listed, please note the paths of your symlink will be different:
 
-symlink image here
+<img src="img/symlink.png">
 
-* You should be presented with a long listing of files / directories within your HPC home.  Look for a line where the permissions begin with 'l' and where the name is followed by a '-->' pointing to another directory location.
-Your symlink should point to '/home5/aqua/' followed by your Aquaculture Project Groupname (e.g. barra, edna, prawn, or gen).  For example, if you're in the eDNA project group, you should have a symlink which points to '/home5/aqua/edna/'.  Make a note of your symlink name, we will need it for next steps.
+* You should be presented with a long listing of files / directories within your HPC home.  
+
+* Look for a line where the permissions begin with 'l' and where the name is followed by a '-->' pointing to another directory location.
+
+* Your symlink should point to '/home5/aqua/' followed by your Aquaculture Project Groupname (e.g. barra, edna, prawn, or gen).  
+
+* For example, if you're in the eDNA project group, you should have a symlink which points to '/home5/aqua/edna/'.  Make a note of your symlink name, we will need it for next steps.
 
 3. Now that you have the name of your symlink directory, we can proceed to configure your rsync script. Start by disconnecting from the hpc, use the 'exit' command
          
@@ -224,6 +237,7 @@ Your symlink should point to '/home5/aqua/' followed by your Aquaculture Project
 10. To exit nano and save this file:
 
 * First hold CONTROL and press ENTER
+
 * Then type 'y' to confirm the file name and press ENTER again
 
 ### Automate File Synchronisation Between Your Computer and the HPC
@@ -238,15 +252,15 @@ Your symlink should point to '/home5/aqua/' followed by your Aquaculture Project
 
 * Syntax for 'cron' is a bit bizarre, the basic structure of a 'cron' command is shown below:
 
-* \*	\*	\*	\*	\*	/path/to/your/rsync.sh
+        \*     \*      \*      \*     \*      /path/to/your/rsync.sh
 
 * In the above example, each \* can be filled in with a time increment to determine the job frequency.  The final command is the name of the script to be executed at the chosen interval.
 
-* Also note that the white-spaces between time interval arguments in your cron file are actually single TABS.
+* Also note that the white-spaces between arguments in your crontab file are actually single TABS.
 
 The image below may help to clarify 'cron' syntax.
 
-CRONTAB IMAGE HERE
+<img src="img/crontab.png">
 
 4. Type the following into your crontab file to schedule synchronisation for 12 noon every Wednesday
 
@@ -259,11 +273,14 @@ CRONTAB IMAGE HERE
 5. To exit nano and save your new scheduled job:
 
 * Hold CONTROL and press X
+
 * Then type 'y' and press ENTER
 
-6. You're all finished, now your chosen directly will synchronise automatically to the HPC every Wednesday at noon.
+6. You're all finished, now your chosen directory will synchronise automatically to the HPC every Wednesday at noon.
 
 * NB: Your computer must be powered ON for the scheduled 'cron' task to run.
+
+
 
 
 
