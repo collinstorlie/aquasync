@@ -252,7 +252,7 @@ This means the files you synchronise will be viewable by other members of your A
 
 * Syntax for 'cron' is a bit bizarre, the basic structure of a 'cron' command is shown below:
 
-        \*     \*      \*      \*     \*      /path/to/your/rsync.sh
+        *     *      *      *     *      /path/to/your/rsync.sh
 
 * In the above example, each \* can be filled in with a time increment to determine the job frequency.  The final command is the name of the script to be executed at the chosen interval.
 
@@ -264,7 +264,7 @@ The image below may help to clarify 'cron' syntax.
 
 4. Type the following into your crontab file to schedule synchronisation for 12 noon every Wednesday
 
-         0	12	*	*	wed	~/Desktop/AQSYNC/rsync.sh >> ~/Desktop/AQSYNC/rsync.log 2>&1
+         0     12      *     *      3      ~/Desktop/AQSYNC/rsync.sh >> ~/Desktop/AQSYNC/rsync.log 2>&1
          
 * NB: Remember, the 'white-spaces' are single TABS
 
