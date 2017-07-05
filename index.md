@@ -6,9 +6,11 @@ layout: default
 ---
 # Accessing the JCU Aquaculture Shared HPC Drive
 
-This is a step-by-step walkthrough guide for connecting the HPC to store and automatically backup your research data.
+This is a step-by-step walkthrough guide for connecting to the HPC to store and automatically backup your research data.
+Many commands below will contain directory paths which reference your user name for your computer, i.e. your JC number.
+Whenever you see a reference to jcXXYYYY within a command in the following documentation, ensure to substitute your JC number instead.
 
-## Connecting to the HPC w/ Filezilla
+## Connecting to the HPC with FileZilla
 
 FileZilla is an SFTP (Secure File Transfer Protocol) Client, used to transfer files between two computers over a secure internet connection.
 You can download Filezilla Client from their website <a href='https://filezilla-project.org/download.php'>here</a>, make sure to select the appropriate version for your computer operating system.
@@ -26,7 +28,7 @@ Once you've installed FileZilla Client, you'll need to configure it to connect t
 * Port: 8822
 * Protocol: SFTP
 * Logon Type: Ask For Password
-* User: Your JC Number (e.g. jcXXYYYY)
+* User: jcXXYYYY
 
 5. Your configuration is now saved, you can connect to the HPC by returning the Site Manager, selecting the 'HPC' connection, and clicking 'Connect'
 
@@ -104,7 +106,7 @@ Use the following command to create your keys:
 
         Host HPC
         	HostName zodiac.hpc.jcu.edu.au
-        	User jc152199
+        	User jcXXYYYY
     		Port 8822
     		IdentityFile ~/.ssh/HPC
     		
@@ -170,11 +172,11 @@ Your key is just a long text string, let's copy it onto your clipboard so that w
         
 * Set the permissions on your 'known\_hosts' file 
         
-        chmod 600 .ssh/known\_hosts
+        chmod 600 .ssh/known_hosts
         
 * Set the permissions on your 'authorized\_keys' file 
         
-        chmod 644 .ssh/authorized\_keys
+        chmod 644 .ssh/authorized_keys
 
 ### Setup File Synchronisation Between Your Mac and the HPC
 
@@ -213,11 +215,11 @@ This means the files you synchronise will be viewable by other members of your A
 
 5. For example, if you wanted to synchronise a directory called AQSYNC on your Desktop, you could first create the folder
         
-        mkdir ~/Desktop/AQSYNC
+        mkdir ~/Desktop/jcXXYYYY_AQSYNC
 
 6. Then navigate to it: 
         
-        cd ~/Desktop/AQSYNC/
+        cd ~/Desktop/jcXXYYYY_AQSYNC/
         
 7. Create your rsync shell script using 'touch'
         
@@ -227,13 +229,11 @@ This means the files you synchronise will be viewable by other members of your A
         
         nano rsync.sh
 
-9. Type the following lines into your shell script exactly (substituting your paths where appropriate):
+9. Type the following lines into your shell script exactly (substituting your jc numberr and the name of your SYMLINK directory in the second argument):
 
         #!/bin/bash
-        rsync -avz ~/Desktop/AQSYNC/ HPC:/home1/15/jc152199/MYSYMLINK
+        rsync -avz ~/Desktop/jcXXYYYY_AQSYNC HPC:/home5/XX/jcXXYYYY/MYSYMLINK
         
-* NB: Please note the lack of a trailing slash in the second rsync script argument, this is intentional.
-
 10. To exit nano and save this file:
 
 * First hold CONTROL and press ENTER
@@ -264,7 +264,7 @@ The image below may help to clarify 'cron' syntax.
 
 4. Type the following into your crontab file to schedule synchronisation for 12 noon every Wednesday
 
-         0     12      *     *      3      ~/Desktop/AQSYNC/rsync.sh >> ~/Desktop/AQSYNC/rsync.log 2>&1
+         0     12      *     *      3      ~/Desktop/jcXXYYYY_AQSYNC/rsync.sh >> ~/Desktop/jcXXYYYY_AQSYNC/rsync.log 2>&1
          
 * NB: Remember, the 'white-spaces' are single TABS
 
@@ -279,6 +279,205 @@ The image below may help to clarify 'cron' syntax.
 6. You're all finished, now your chosen directory will synchronise automatically to the HPC every Wednesday at noon.
 
 * NB: Your computer must be powered ON for the scheduled 'cron' task to run.
+
+## Configuring Your Windows Computer
+
+Please follow these step-by-step instructions, if you're having difficulty contact collin.storlie@jcu.edu.au for assistance.
+
+You will notice some lines in these instructions are in code blocks (highlighted in blue):
+
+    pwd
+    
+These instructions can be pasted directly into your Mac Terminal.
+Please note that some commands reference file/directory paths specific to your computer, these often consist of a user name, and will be different for each person.  
+
+For example my HPC home account and Windows home are respectively:
+
+    /home1/15/jc152199/
+    
+    C:\Users\jc152199\
+    
+Your paths will be based on your user id too, don't forget to substitute them where appropriate.
+Also note that windows paths use '\\' slashes instead of '/' slahes.
+
+Now let's get started by installing Cygwin, which is a Terminal Emulator for Windows.
+
+### Installing Cygwin
+
+1. Determine if your OS is 32-bit or 64 bit:
+
+* Open a File Explorer Window
+
+* Right-click the 'This PC' icon, then select 'Properties'
+
+* Look for the line labelled 'System Type', there you will see if your OS is 32 or 64-bit
+
+2. Download the appropriate version of Cygwin for your OS <a href="https://cygwin.com/install.html">here</a>.
+
+3. Once the executable file has downloaded, locate it (try looking in Downloads) and double-click it
+
+4. Click 'Next' at the first window that appears
+
+5. Select 'Install From Internet' and click 'Next'
+
+6. Confirm the 'root' directory to install Cygwin at, it should be C:\\cygwin64\\, ensure that you select 'Install for All Users' and then click 'Next'
+
+7. Confirm the location to download the additional packages we require, it should be C:\\Users\\jcXXYYYY\\Downloads, then click 'Next'
+
+8. Confirm the default preferred internet connection as 'Direct Connection', then click 'Next'
+
+9. At this point, if you don't have the most recent version of Cygwin the installer will display some warning messages.
+If you see warning messages during this step, cancel the install, return to the <a href="https://cygwin.com/install.html">Cygwin download</a> and get the newest version.
+
+10. Once the installer finishes downloading the base Cygwin package (should only take a few seconds), a new window will open
+that contains a list of other Cygwin packages we can install.  Please select the following additional packages to download at this point:
+
+11. Use the search bar at the top and type in 'ssh' (don't press enter, or you will proceed with installation)
+
+* Expand the 'Net' tab by clicking on the '+' symbol on the left
+
+* We need to download ALL of these packages. Select the 'Skip' icon on the left for each package, a version number should appear in it's place.  Also, for each package, tick the box labelled 'src'.
+
+12. Use the search bar at the top and type in 'rsync'
+
+* Expand the 'Net' tab by clicking on the '+' symbol on the left
+
+* There should be a single entry, select the 'Skip' icon on the left, a version number should appear in it's place.  Also, tick the box labelled 'src'.
+
+13. Use the search bar at the top and type in 'nano'
+
+* Expand the 'Editor' tab by clicking the '+' symbol on the left
+
+* We need to download BOTH of these packages.  Select the 'Skip' icon on the left, a version number should appear in it's place.  Also, tick the box labeled 'src'.
+
+14. Now that you've selected the appropriate packages to download, you can click 'Next' at the bottom-right to proceed.
+
+15. A new window will appear labelled 'Resolving Dependencies', these are additional packages that Cygwin MUST download for our desired packages to work.
+Ensure the tick box labelled 'Select Required Packages' is ticked, then click 'Next' to proceed.
+
+16. A new window will appear showing the  progress of your Cygwin downloads and installation, it may take a few minutes ( ~5 - 10 ) to complete
+
+17. Once finished, a new window will appear.  Select where you want your Cygwin launch icons to be placed, then click 'OK' to finish.
+
+### Configure your Windows computer to connect to the HPC
+
+1.  Double click the Cygwin icon
+
+2.  Determine the HOME directory of your computer and make a note of it.
+
+        echo $HOME
+
+3.  List the files/directories in your HOME directory, look for the directory labelled '.ssh'
+
+        ls -a .ssh  
+
+4.  If this command returns the error 'No such file or directory', then we need to create the directory.  If you don't see this warning, then you can proceed to Step 6
+
+5.  Create a directory named '.ssh'
+
+        mkdir .ssh
+        
+6. Navigate to your .ssh directory 
+
+        cd .ssh
+        
+7. Now we have the directory to place our 'keys' in, keys allow us to securely connect to other computers (including the HPC).
+Use the following command to create your keys:
+        
+        ssh-keygen -b 4096 -t rsa -f HPC
+        
+8. This command creates two files, a public and private key of type 'rsa' with 4096 byte encryption, files will be named HPC.pub and HPC respectively.
+
+* HPC is the 'private key' which will be kept securely on your local computer
+
+* HPC.pub is the 'public key' which needs to be placed in '.ssh/authorized_keys' in your HPC HOME account
+
+9. Start by creating a the .ssh config file with the command `touch`
+
+         touch config
+
+10. Now we can use the text editor 'nano' to add some connection information to the config file.  Nano will open within your Terminal window.
+
+11. To open nano and start editing your 'config' file, use the command
+
+        nano config
+
+12. Insert the following lines exactly (substituting your JCU ID)
+
+        Host HPC
+        	HostName zodiac.hpc.jcu.edu.au
+        	User jcXXYYYY
+    		Port 8822
+    		IdentityFile ~/.ssh/HPC
+    		
+	
+13. To exit nano, and save your config file, do the following:
+
+* Hold CONTROL and press 'X' (to save)
+
+* Type 'y' to confirm the file name as 'config' and then press ENTER
+
+14. Before we can connect to the HPC with our shiny new keys, we'll need to add our PUBLIC key to a file in your HPC home account.
+Your key is just a long text string, let's copy it onto your clipboard so that we can add it to the HPC next.
+
+        pbcopy < HPC.pub
+        
+### Connect to the HPC, and add your key to the authorized_keys file
+
+1. Connect to the HPC using ssh 
+
+         ssh HPC
+        
+* When you FIRST connect you'll be presented with a warning 'The authenticity of host can't be established.  Are you sure you want to continue connecting?'
+
+* This is your local computer warning you that you're about to connect to another computer it hasn't connected to before, press 'yes' then ENTER to proceed
+
+2. Navigate to the '.ssh/' directory using `cd`
+
+        cd .ssh
+
+3. Now, we can paste the contents of your PUBLIC key file to 'authorized_keys' file here, using the following command:
+
+        echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDuf8go52SCEgU9q2l1pXXi5pDgts2EtBQ6JqCJHI7bxafhQSH5NyKfYPioYpeWI8tkP+axwtthQphRksG+QNliCvkdo08l0TcNEmuocSuMD+0mgHKFPNZG82Jh5rL5oPewMR4E2dGpW6nhve+afYItL9iMNmKQD7Rg15SJTJ79xJUDXwCwtyrjRX4GcXeNkABM8DUipErQIQvSzx4DEDawTqAry0+xtAO5U43+Gh3LOJgosIDrMDzdORxvlupQKSHFIJm3ov3PhpKyyfNT90kEiXz6MJhU2A7fqg9x8JSqXgAVZxqIlPC1IgYiR1W+LF7ieY4VhBDKZVsMznCcvZ63jA+XWOmbMm5uVUNn8zohRVt5oiSgUeFP94UgF1ld4GG58P3gX65NJGLe15dJPYa6yfT5WZrga7qlE82TpIsTN0I3HT6kTKa5/SEtyfNQPu+qR/MsP96IJtr7uZEfrX8mtu60DC2rDc+2zZXME0BnTx8lV19V02v8hARokmr6bEQZv+1v4JMSqMmVcwleFU87euGb1DmYc1uC7Y9zoC/icqfsUsHVMdbGCYhq+ziyfwHphNh56+pM43vKc8id36DBKxc3J8LnZYt3y/qGHUfXJGc0yDE4WyKWPSP2NchhqCJrHcNX0TiSNqV+pufCZrvWWjwKQzGB4/TgSumAZ2h7Ow== jc152199@C02SY00TGTDX" >> authorized_keys
+
+* In the example above, the long string of alphanumerals is my public key, make sure you paste your PUBLIC key here and not mine.  It must be surrounded by double-quotes.  You can paste text into your terminal by holding CONTROL and pressing 'V'.
+
+4.  Now close your connection to the HPC by typing the command `exit`
+
+5.  Now you should be able to connect without a password using your ssh config file, so try to connect again using `ssh`
+
+         ssh HPC
+         
+* If all is well, your connection to the HPC will proceed WITHOUT you needing to specify your password.
+
+* Please note, that ANYONE who obtains your PRIVATE key will now be able to connect to the HPC as you without providing a password.
+
+* You must protect your PRIVATE key.  To ensure maximum security for your PRIVATE key, we recommend using the following security settings for your .ssh directory and the files within it.
+
+6. Return to your HOME account on YOUR computer (NOT THE HPC), simply input the command `cd` into your Terminal, then run the following commands:
+
+* Set the permissions on your .ssh directory to 'read-only' for others 
+
+        chmod 744 .ssh/
+        
+* Set the permissions on your PRIVATE key to 'read-only' for just you 
+
+        chmod 600 .ssh/HPC
+
+7. Now reconnect to the HPC using `ssh HPC`, then run the following commands:
+
+* Set the permissions on your .ssh directory 
+        
+        chmod 700 .ssh/
+        
+* Set the permissions on your 'known\_hosts' file 
+        
+        chmod 600 .ssh/known_hosts
+        
+* Set the permissions on your 'authorized\_keys' file 
+        
+        chmod 644 .ssh/authorized_keys
+
 
 
 
