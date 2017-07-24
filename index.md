@@ -215,7 +215,7 @@ rsync -avz ~/Desktop/jcXXYYYY_AQSYNC HPC:/homeN/XX/jcXXYYYY/MYSYMLINK
 * In the above command, your directory path will start with 'homeN', where 'N' is a number between 1 and 6. If you can't remember which 'home' your HPC count resides in.  
 Simply log-in to the HPC with the command `ssh HPC` then run the command `pwd` to display the full directory path of your HPC home.       
 10. To exit nano and save this file:
-* First hold CONTROL and press ENTER
+* Use the key binding CTRL+X
 * Then type 'y' to confirm the file name and press ENTER again
 
 ### Automate File Synchronisation Between Your Computer and the HPC
@@ -361,7 +361,7 @@ cd .ssh
 ```
 echo "Contents of Your PUBLIC Key File" >> authorized_keys
 ```
-* Make sure you paste your PUBLIC key here and where the above command say "Contents of Your PUBLIC Key File".  It must be surrounded by double-quotes.  You can paste text Command Prompt by right-clicking within the window and selecting 'Paste'.
+* Make sure you paste your PUBLIC key here and where the above command say "Contents of Your PUBLIC Key File".  It must be surrounded by double-quotes.  You can paste text into the Command Prompt by right-clicking within the window and selecting 'Paste'.
 4.  Now close your connection to the HPC by typing the command `exit`
 5.  Now you should be able to connect without a password using your ssh config file, so try to connect again using `ssh`
 ```
@@ -382,7 +382,7 @@ chmod 600 .ssh\HPC
 7. Now reconnect to the HPC using `ssh HPC`, then run the following commands:
 * Set the permissions on your .ssh directory 
 ```        
-chmod 700 .ssh/
+chmod 700 .ssh
 ```      
 * Set the permissions on your 'known\_hosts' file 
 ```
