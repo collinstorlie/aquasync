@@ -1,0 +1,45 @@
+<h2 id="configuring-your-mac-computer">Configuring Your Mac Computer</h2>
+<p>Please follow these step-by-step instructions, if you&#39;re having difficulty contact collin.storlie@jcu.edu.au for assistance.</p>
+<p>You will notice some lines in these instructions are in code blocks (highlighted in blue):</p>
+<pre><code>pwd
+</code></pre><p>These instructions can be pasted directly into your Mac Terminal.<br>Please note that some commands reference file/directory paths specific to your computer, these often consist of a user name, and will be different for each person.  </p>
+<p>For example my HPC home account and Mac home are respectively:</p>
+<pre><code>/home1/15/jc152199/
+/Users/jc152199/
+</code></pre><p>Your paths will be based on your user id too, don&#39;t forget to substitute them where appropriate.</p>
+<h3 id="configure-your-mac-to-connect-to-the-hpc">Configure your Mac to connect to the HPC</h3>
+<ol>
+<li>Open the Terminal, found in Applications -&gt; Utilities -&gt; Terminal</li>
+<li>Determine the HOME directory of your computer and make a note of it.<pre><code>echo $HOME
+</code></pre></li>
+<li>List the files/directories in your HOME directory, look for the directory labelled &#39;.ssh&#39;<pre><code>ls -a .ssh
+</code></pre></li>
+<li>If this command returns the error &#39;No such file or directory&#39;, then we need to create the directory.  If you don&#39;t see this warning, then you can proceed to Step 6</li>
+<li>Create a directory named &#39;.ssh&#39;<pre><code>mkdir .ssh
+</code></pre></li>
+<li>Navigate to your .ssh directory <pre><code>cd .ssh
+</code></pre></li>
+<li>Now we have the directory to place our &#39;keys&#39; in, keys allow us to securely connect to other computers (including the HPC).<br>Use the following command to create your keys:<pre><code>ssh-keygen -b 4096 -t rsa -f HPC
+</code></pre></li>
+<li>This command creates two files, a public and private key of type &#39;rsa&#39; with 4096 byte encryption, files will be named HPC.pub and HPC respectively.</li>
+<li>HPC is the &#39;private key&#39; which will be kept securely on your local computer</li>
+<li>HPC.pub is the &#39;public key&#39; which needs to be placed in &#39;.ssh/authorized_keys&#39; in your HPC HOME account</li>
+<li>Start by creating a the .ssh config file with the command <code>touch</code><pre><code>touch config
+</code></pre></li>
+<li>Now we can use the text editor &#39;nano&#39; to add some connection information to the config file.  Nano will open within your Terminal window.</li>
+<li>To open nano and start editing your &#39;config&#39; file, use the command<pre><code>nano config
+</code></pre></li>
+<li><p>Insert the following lines exactly (substituting your JCU ID)</p>
+<pre><code>Host HPC
+HostName zodiac.hpc.jcu.edu.au
+User jcXXYYYY
+Port 8822
+IdentityFile ~/.ssh/HPC
+</code></pre></li>
+<li><p>To exit nano, and save your config file, do the following:</p>
+</li>
+<li>CTRL+X To Save</li>
+<li>Type &#39;y&#39; to confirm the file name as &#39;config&#39; and then press ENTER</li>
+<li>Before we can connect to the HPC with our shiny new keys, we&#39;ll need to add our PUBLIC key to a file in your HPC home account.<br>Your key is just a long text string, let&#39;s copy it onto your clipboard so that we can add it to the HPC next.<pre><code>pbcopy &lt; HPC.pub
+</code></pre></li>
+</ol>
