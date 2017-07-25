@@ -75,3 +75,4 @@ Your key is just a long text string, let's copy it onto your clipboard so that w
 pbcopy < HPC.pub
 ```
      
+### Generate Keys & Secure Your Files
