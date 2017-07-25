@@ -50,8 +50,8 @@ the 'HPC' connection, and clicking 'Connect'
 
 <p><a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/{{ baseurl }}/wincygwin/">Step 1: Install Cygwin Terminal Emulator</a></p>
 <p><a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/{{ baseurl }}/winconnect/">Step 2: Configure Your Windows PC To Connect To The HPC</a></p>
-<p><a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/{{ baseurl }}/winkeys/">Step 3: Synchronise Files Between Your Windows PC & The HPC</a></p>
-<p><a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/{{ baseurl }}/winsync/">Step 4: Generate Keys & Secure Your Files</a></p>
+<p><a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/{{ baseurl }}/winkeys/">Step 3: Generate Keys & Secure Your Files</a></p>
+<p><a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/{{ baseurl }}/winsync/">Step 4: Synchronise Files Between Your Windows PC & The HPC</a></p>
 <p><a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/{{ baseurl }}/winautomate/">Step 5: Automate File Synchronisation Between Your Computer & The HPC</a></p>
 
 If you are discover any errors in this documentation, please raise an issue on GitHub or contact collin.storlie@jcu.edu.au.
