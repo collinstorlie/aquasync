@@ -4,15 +4,15 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: default
 ---
-# Accessing the JCU Aquaculture Shared HPC Drive
+# Access & Sync Data To the JCU Aquaculture Shared HPC Drive
 
-This is a step-by-step walkthrough guide for connecting to the HPC to store and automatically backup your research data.
+This is a step-by-step walkthrough guide for connecting to the HPC to store and automatically backup your research data.  It is partitioned into sections, and provides separate instructions for Mac and Windows PC Users.
 Many commands below will contain directory paths which reference your user name for your computer, i.e. your JC number.
 Whenever you see a reference to jcXXYYYY within a command in the following documentation, ensure to substitute your JC number instead.
 
-## Connecting to the HPC with FileZilla
+## Connecting to the HPC with FileZilla (For Mac and Windows PC Users)
 
-FileZilla is an SFTP (Secure File Transfer Protocol) Client, used to transfer files between two computers over a secure internet connection.
+FileZilla is an SFTP (Secure File Transfer Protocol) Client, used to transfer files between two computers over a secure internet connection.  FileZilla has a GUI interface, allowing you to simply 'drag & drop' files between your computer and the HPC.
 You can download Filezilla Client from their website <a href='https://filezilla-project.org/download.php'>here</a>, make sure to select the appropriate version for your computer operating system.
 Once you've installed FileZilla Client, you'll need to configure it to connect to the HPC.  Follow these short steps:
 
