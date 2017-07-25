@@ -1,3 +1,9 @@
+---
+# You don't need to edit this file, it's empty on purpose.
+# Edit theme's home layout instead if you wanna make some changes
+# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+layout: default
+---
 ### Automate File Synchronisation Between Your Computer and the HPC
 1. This rsync script will now move files between your local computer and HPC HOME account, only moving files which have been newly created or modified since the last sync.
 2. We will now configure the program 'cron' to schedule synchronisation as an automated task.  'cron' comes pre-installed on your Mac and is accessed via the Terminal.
@@ -10,7 +16,7 @@ env EDITOR=nano crontab -e
 * In the above example, each \* can be filled in with a time increment to determine the job frequency.  The final command is the name of the script to be executed at the chosen interval.
 * Also note that the white-spaces between arguments in your crontab file are actually single TABS.
 The image below may help to clarify 'cron' syntax.
-<img src="img/crontab.png">
+<img src="{{ site.baseurl | replace:'http:','https:' }}/img/crontab.png">
 4. Type the following into your crontab file to schedule synchronisation for 12 noon every Wednesday
 ```
 0     12      *     *      3      ~/Desktop/jcXXYYYY_AQSYNC/rsync.sh >> ~/Desktop/jcXXYYYY_AQSYNC/rsync.log 2>&1

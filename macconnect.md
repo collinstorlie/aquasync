@@ -1,3 +1,10 @@
+---
+# You don't need to edit this file, it's empty on purpose.
+# Edit theme's home layout instead if you wanna make some changes
+# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+layout: default
+---
+
 ## Configuring Your Mac Computer
 
 Please follow these step-by-step instructions, if you're having difficulty contact collin.storlie@jcu.edu.au for assistance.
@@ -75,4 +82,4 @@ Your key is just a long text string, let's copy it onto your clipboard so that w
 pbcopy < HPC.pub
 ```
      
-### Generate Keys & Secure Your Files
+### <a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/{{ baseurl }}/mackeys/">Next Step: Generate Keys</a>
