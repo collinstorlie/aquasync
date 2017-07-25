@@ -39,7 +39,7 @@ the 'HPC' connection, and clicking 'Connect'
 8. To transfer files and folders between your computer and the HPC, simply drag and drop between the two windows.
 * Please note, when you initially connect to the HPC via Filezilla, you'll automatically be placed in your HPC 'HOME' directory, make a note of this location for later.
 
-<a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/">macconnect</a>
+<a class="post-link" href="{{ github_url_io }}/">macconnect</a>
 
 ## Configuring Your Windows Computer
 
