@@ -54,4 +54,4 @@ cat HPC.pub
 ```
 12. You can use your mouse to highlight the long string of alphanumeric characters that comprise your key (it should begin with 'ssh-rsa' and end with your JC number and computer serial number).  To copy the text, right-click within the Command Prompt window and select 'Copy'.
         
-### <a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/{{ baseurl }}/winkeys/">Next Step: Synchronise Files</a>
+### <a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/{{ baseurl }}/winkeys/">Next Step: Generate Keys</a>

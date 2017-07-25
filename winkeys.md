@@ -52,4 +52,4 @@ chmod 600 .ssh/known_hosts
 chmod 644 .ssh/authorized_keys
 ```
 
-### <a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/{{ baseurl }}/winsync/">Next Step: Generate Keys</a>
+### <a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/{{ baseurl }}/winsync/">Next Step: Synchronise Your Files</a>
