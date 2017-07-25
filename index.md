@@ -54,7 +54,7 @@ the 'HPC' connection, and clicking 'Connect'
 <p><a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/{{ baseurl }}/winsync/">Step 4: Synchronise Files Between Your Windows PC & The HPC</a></p>
 <p><a class="post-link" href="{{ site.baseurl | replace:'http:','https:' }}/{{ baseurl }}/winautomate/">Step 5: Automate File Synchronisation Between Your Computer & The HPC</a></p>
 
-If you are discover any errors in this documentation, please raise an issue on GitHub or contact collin.storlie@jcu.edu.au.
+If you discover any errors in this documentation, please raise an issue on GitHub or contact collin.storlie@jcu.edu.au.
 
 Please note I (Collin Storlie) will be on vacation from July 29th - August 25th 2017. 
 
